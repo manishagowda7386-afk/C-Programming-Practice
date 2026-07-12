@@ -1,3 +1,3 @@
 # Mini Projects
 
-This folder contains complete C projects developed to strengthen problem-solving, programming, and software development skills.
+This folder contains complete C projects developed using concepts such as structures, functions, pointers, and file handling.
