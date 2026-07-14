@@ -5,6 +5,7 @@
 #include "../include/file_manager.h"
 #include "../include/transaction_history.h"
 #include "../include/report.h"
+#include "../include/interest.h"
 
 int main()
 {
@@ -74,6 +75,10 @@ int main()
                 break;
 
             case 14:
+                calculateInterest();
+                break;
+
+            case 15:
                 saveAccounts();
 
                 printf("\n=====================================\n");
