@@ -22,5 +22,6 @@ void updateAccount();
 void deleteAccount();
 void bankDashboard();
 void changePin();
+void exportAccountReport();
 
 #endif
