@@ -2,11 +2,24 @@
 #include "../include/account.h"
 #include "../include/transaction.h"
 
+int verifyPin(int index)
+{
+    int pin;
+
+    printf("Enter 4-Digit PIN : ");
+    scanf("%d",&pin);
+
+    if(accounts[index].pin==pin)
+        return 1;
+
+    printf("\nIncorrect PIN!\n");
+    return 0;
+}
+
 void depositMoney()
 {
-    int accountNumber;
+    int accountNumber,i;
     float amount;
-    int i;
 
     if(totalAccounts==0)
     {
@@ -23,7 +36,10 @@ void depositMoney()
     {
         if(accounts[i].accountNumber==accountNumber)
         {
-            printf("Enter Deposit Amount : ");
+            if(!verifyPin(i))
+                return;
+
+            printf("Enter Amount : ");
             scanf("%f",&amount);
 
             if(amount<=0)
@@ -34,11 +50,8 @@ void depositMoney()
 
             accounts[i].balance+=amount;
 
-            printf("\n===================================\n");
-            printf("Amount Deposited Successfully!\n");
+            printf("\nDeposit Successful!\n");
             printf("Updated Balance : %.2f\n",accounts[i].balance);
-            printf("===================================\n");
-
             return;
         }
     }
@@ -48,9 +61,8 @@ void depositMoney()
 
 void withdrawMoney()
 {
-    int accountNumber;
+    int accountNumber,i;
     float amount;
-    int i;
 
     if(totalAccounts==0)
     {
@@ -67,7 +79,10 @@ void withdrawMoney()
     {
         if(accounts[i].accountNumber==accountNumber)
         {
-            printf("Enter Withdrawal Amount : ");
+            if(!verifyPin(i))
+                return;
+
+            printf("Enter Amount : ");
             scanf("%f",&amount);
 
             if(amount<=0)
@@ -84,11 +99,8 @@ void withdrawMoney()
 
             accounts[i].balance-=amount;
 
-            printf("\n====================================\n");
-            printf("Withdrawal Successful!\n");
+            printf("\nWithdrawal Successful!\n");
             printf("Remaining Balance : %.2f\n",accounts[i].balance);
-            printf("====================================\n");
-
             return;
         }
     }
@@ -98,8 +110,7 @@ void withdrawMoney()
 
 void checkBalance()
 {
-    int accountNumber;
-    int i;
+    int accountNumber,i;
 
     if(totalAccounts==0)
     {
@@ -116,6 +127,9 @@ void checkBalance()
     {
         if(accounts[i].accountNumber==accountNumber)
         {
+            if(!verifyPin(i))
+                return;
+
             printf("\nAccount Holder : %s\n",accounts[i].accountHolder);
             printf("Current Balance : %.2f\n",accounts[i].balance);
             return;
