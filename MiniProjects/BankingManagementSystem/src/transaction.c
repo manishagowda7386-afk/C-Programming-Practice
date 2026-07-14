@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <string.h>
 #include "../include/account.h"
 #include "../include/transaction.h"
+#include "../include/transaction_history.h"
 
 int verifyPin(int index)
 {
@@ -39,7 +41,7 @@ void depositMoney()
             if(!verifyPin(i))
                 return;
 
-            printf("Enter Amount : ");
+            printf("Enter Deposit Amount : ");
             scanf("%f",&amount);
 
             if(amount<=0)
@@ -50,8 +52,11 @@ void depositMoney()
 
             accounts[i].balance+=amount;
 
+            addTransaction(accountNumber,"Deposit",amount);
+
             printf("\nDeposit Successful!\n");
             printf("Updated Balance : %.2f\n",accounts[i].balance);
+
             return;
         }
     }
@@ -82,7 +87,7 @@ void withdrawMoney()
             if(!verifyPin(i))
                 return;
 
-            printf("Enter Amount : ");
+            printf("Enter Withdrawal Amount : ");
             scanf("%f",&amount);
 
             if(amount<=0)
@@ -99,8 +104,11 @@ void withdrawMoney()
 
             accounts[i].balance-=amount;
 
+            addTransaction(accountNumber,"Withdrawal",amount);
+
             printf("\nWithdrawal Successful!\n");
             printf("Remaining Balance : %.2f\n",accounts[i].balance);
+
             return;
         }
     }
@@ -132,9 +140,14 @@ void checkBalance()
 
             printf("\nAccount Holder : %s\n",accounts[i].accountHolder);
             printf("Current Balance : %.2f\n",accounts[i].balance);
+
             return;
         }
     }
 
     printf("\nAccount Not Found!\n");
+}
+
+void viewTransactionHistory()
+{
 }
