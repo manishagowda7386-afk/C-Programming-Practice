@@ -65,6 +65,10 @@ int main()
                 break;
 
             case 12:
+                changePin();
+                break;
+
+            case 13:
                 saveAccounts();
 
                 printf("\n=====================================\n");
