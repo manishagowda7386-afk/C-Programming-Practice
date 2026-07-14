@@ -10,6 +10,7 @@ typedef struct
     float balance;
     int pin;
     char accountType[20];
+    int isLocked;
 }Account;
 
 extern Account accounts[MAX_ACCOUNTS];
@@ -24,5 +25,8 @@ void deleteAccount();
 void bankDashboard();
 void changePin();
 void exportAccountReport();
+
+void lockAccount(int index);
+void unlockAccount(int accountNumber);
 
 #endif
