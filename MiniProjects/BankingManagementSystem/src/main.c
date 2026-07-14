@@ -6,6 +6,7 @@
 #include "../include/transaction_history.h"
 #include "../include/report.h"
 #include "../include/interest.h"
+#include "../include/statement.h"
 
 void welcomeScreen()
 {
@@ -13,16 +14,17 @@ void welcomeScreen()
     printf("=============================================================\n");
     printf("            BANKING MANAGEMENT SYSTEM v1.0\n");
     printf("=============================================================\n");
-    printf(" Features Available\n");
+    printf("Features Available\n");
     printf("-------------------------------------------------------------\n");
-    printf(" * Create Account\n");
-    printf(" * Deposit / Withdraw Money\n");
-    printf(" * Transfer Money\n");
-    printf(" * Search Accounts\n");
-    printf(" * Transaction History\n");
-    printf(" * Interest Calculator\n");
-    printf(" * Export Account Report\n");
-    printf(" * Secure PIN Authentication\n");
+    printf("* Create Account\n");
+    printf("* Deposit / Withdraw Money\n");
+    printf("* Transfer Money\n");
+    printf("* Search Accounts\n");
+    printf("* Transaction History\n");
+    printf("* Interest Calculator\n");
+    printf("* Account Statement\n");
+    printf("* Export Account Report\n");
+    printf("* Secure PIN Authentication\n");
     printf("=============================================================\n\n");
 }
 
@@ -104,10 +106,14 @@ int main()
                 break;
 
             case 16:
+                generateStatement();
+                break;
+
+            case 17:
                 saveAccounts();
 
                 printf("\n=============================================================\n");
-                printf("   Thank you for using Banking Management System v1.0\n");
+                printf("   Thank You For Using Banking Management System\n");
                 printf("=============================================================\n");
 
                 return 0;
