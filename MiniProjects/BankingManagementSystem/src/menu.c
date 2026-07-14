@@ -20,6 +20,7 @@ void displayMenu()
     printf("12. Change PIN\n");
     printf("13. Export Account Report\n");
     printf("14. Interest Calculator\n");
-    printf("15. Exit\n");
+    printf("15. Transfer Money\n");
+    printf("16. Exit\n");
     printf("=================================================\n");
 }
