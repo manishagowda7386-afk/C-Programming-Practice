@@ -1,153 +1,164 @@
 #include <stdio.h>
 #include <string.h>
 #include "../include/account.h"
-#include "../include/transaction.h"
-#include "../include/transaction_history.h"
 
-int verifyPin(int index)
+Account accounts[MAX_ACCOUNTS];
+int totalAccounts=0;
+
+void createAccount()
 {
-    int pin;
-
-    printf("Enter 4-Digit PIN : ");
-    scanf("%d",&pin);
-
-    if(accounts[index].pin==pin)
-        return 1;
-
-    printf("\nIncorrect PIN!\n");
-    return 0;
-}
-
-void depositMoney()
-{
-    int accountNumber,i;
-    float amount;
-
-    if(totalAccounts==0)
+    if(totalAccounts>=MAX_ACCOUNTS)
     {
-        printf("\nNo Accounts Available!\n");
+        printf("\nDatabase Full!\n");
         return;
     }
 
-    printf("\n========== DEPOSIT MONEY ==========\n");
+    printf("\n========== CREATE ACCOUNT ==========\n");
 
-    printf("Enter Account Number : ");
-    scanf("%d",&accountNumber);
+    printf("Account Number : ");
+    scanf("%d",&accounts[totalAccounts].accountNumber);
+
+    printf("Account Holder : ");
+    scanf(" %[^\n]",accounts[totalAccounts].accountHolder);
+
+    printf("Initial Balance : ");
+    scanf("%f",&accounts[totalAccounts].balance);
+
+    printf("Create 4 Digit PIN : ");
+    scanf("%d",&accounts[totalAccounts].pin);
+
+    totalAccounts++;
+
+    printf("\nAccount Created Successfully!\n");
+}
+
+void displayAllAccounts()
+{
+    int i;
+
+    if(totalAccounts==0)
+    {
+        printf("\nNo Accounts Available.\n");
+        return;
+    }
+
+    printf("\n========== ALL ACCOUNTS ==========\n");
 
     for(i=0;i<totalAccounts;i++)
     {
-        if(accounts[i].accountNumber==accountNumber)
+        printf("\nAccount %d\n",i+1);
+        printf("-----------------------------\n");
+        printf("Number  : %d\n",accounts[i].accountNumber);
+        printf("Name    : %s\n",accounts[i].accountHolder);
+        printf("Balance : %.2f\n",accounts[i].balance);
+    }
+}
+
+void searchAccount()
+{
+    int number,i;
+
+    printf("\nEnter Account Number : ");
+    scanf("%d",&number);
+
+    for(i=0;i<totalAccounts;i++)
+    {
+        if(accounts[i].accountNumber==number)
         {
-            if(!verifyPin(i))
-                return;
-
-            printf("Enter Deposit Amount : ");
-            scanf("%f",&amount);
-
-            if(amount<=0)
-            {
-                printf("\nInvalid Amount!\n");
-                return;
-            }
-
-            accounts[i].balance+=amount;
-
-            addTransaction(accountNumber,"Deposit",amount);
-
-            printf("\nDeposit Successful!\n");
-            printf("Updated Balance : %.2f\n",accounts[i].balance);
-
+            printf("\nAccount Found\n");
+            printf("Name : %s\n",accounts[i].accountHolder);
+            printf("Balance : %.2f\n",accounts[i].balance);
             return;
         }
     }
 
-    printf("\nAccount Not Found!\n");
+    printf("\nAccount Not Found.\n");
 }
 
-void withdrawMoney()
+void updateAccount()
 {
-    int accountNumber,i;
-    float amount;
+    int number,i;
 
-    if(totalAccounts==0)
-    {
-        printf("\nNo Accounts Available!\n");
-        return;
-    }
-
-    printf("\n========== WITHDRAW MONEY ==========\n");
-
-    printf("Enter Account Number : ");
-    scanf("%d",&accountNumber);
+    printf("\nEnter Account Number : ");
+    scanf("%d",&number);
 
     for(i=0;i<totalAccounts;i++)
     {
-        if(accounts[i].accountNumber==accountNumber)
+        if(accounts[i].accountNumber==number)
         {
-            if(!verifyPin(i))
-                return;
+            printf("Enter New Name : ");
+            scanf(" %[^\n]",accounts[i].accountHolder);
 
-            printf("Enter Withdrawal Amount : ");
-            scanf("%f",&amount);
+            printf("Enter New PIN : ");
+            scanf("%d",&accounts[i].pin);
 
-            if(amount<=0)
-            {
-                printf("\nInvalid Amount!\n");
-                return;
-            }
-
-            if(amount>accounts[i].balance)
-            {
-                printf("\nInsufficient Balance!\n");
-                return;
-            }
-
-            accounts[i].balance-=amount;
-
-            addTransaction(accountNumber,"Withdrawal",amount);
-
-            printf("\nWithdrawal Successful!\n");
-            printf("Remaining Balance : %.2f\n",accounts[i].balance);
-
+            printf("\nAccount Updated Successfully.\n");
             return;
         }
     }
 
-    printf("\nAccount Not Found!\n");
+    printf("\nAccount Not Found.\n");
 }
 
-void checkBalance()
+void deleteAccount()
 {
-    int accountNumber,i;
+    int number,i,j;
 
-    if(totalAccounts==0)
-    {
-        printf("\nNo Accounts Available!\n");
-        return;
-    }
-
-    printf("\n========== CHECK BALANCE ==========\n");
-
-    printf("Enter Account Number : ");
-    scanf("%d",&accountNumber);
+    printf("\nEnter Account Number : ");
+    scanf("%d",&number);
 
     for(i=0;i<totalAccounts;i++)
     {
-        if(accounts[i].accountNumber==accountNumber)
+        if(accounts[i].accountNumber==number)
         {
-            if(!verifyPin(i))
-                return;
+            for(j=i;j<totalAccounts-1;j++)
+            {
+                accounts[j]=accounts[j+1];
+            }
 
-            printf("\nAccount Holder : %s\n",accounts[i].accountHolder);
-            printf("Current Balance : %.2f\n",accounts[i].balance);
+            totalAccounts--;
 
+            printf("\nAccount Deleted Successfully.\n");
             return;
         }
     }
 
-    printf("\nAccount Not Found!\n");
+    printf("\nAccount Not Found.\n");
 }
 
-void viewTransactionHistory()
+void bankDashboard()
 {
+    int i;
+    float totalBalance=0;
+    float highestBalance=0;
+    float lowestBalance=0;
+
+    if(totalAccounts==0)
+    {
+        printf("\nNo Accounts Available.\n");
+        return;
+    }
+
+    highestBalance=accounts[0].balance;
+    lowestBalance=accounts[0].balance;
+
+    for(i=0;i<totalAccounts;i++)
+    {
+        totalBalance+=accounts[i].balance;
+
+        if(accounts[i].balance>highestBalance)
+            highestBalance=accounts[i].balance;
+
+        if(accounts[i].balance<lowestBalance)
+            lowestBalance=accounts[i].balance;
+    }
+
+    printf("\n====================================\n");
+    printf("         BANK DASHBOARD\n");
+    printf("====================================\n");
+    printf("Total Accounts      : %d\n",totalAccounts);
+    printf("Total Bank Balance  : %.2f\n",totalBalance);
+    printf("Highest Balance     : %.2f\n",highestBalance);
+    printf("Lowest Balance      : %.2f\n",lowestBalance);
+    printf("====================================\n");
 }
