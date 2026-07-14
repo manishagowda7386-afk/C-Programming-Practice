@@ -79,6 +79,10 @@ int main()
                 break;
 
             case 15:
+                transferMoney();
+                break;
+
+            case 16:
                 saveAccounts();
 
                 printf("\n=====================================\n");
