@@ -2,10 +2,13 @@
 #include "../include/menu.h"
 #include "../include/account.h"
 #include "../include/transaction.h"
+#include "../include/file_manager.h"
 
 int main()
 {
     int choice;
+
+    loadAccounts();
 
     while(1)
     {
@@ -41,11 +44,23 @@ int main()
                 break;
 
             case 7:
-                printf("\nThank You For Using Banking Management System.\n");
+                updateAccount();
+                break;
+
+            case 8:
+                deleteAccount();
+                break;
+
+            case 9:
+                saveAccounts();
+                printf("\n=====================================\n");
+                printf(" Accounts Saved Successfully.\n");
+                printf(" Thank You For Using Our Bank.\n");
+                printf("=====================================\n");
                 return 0;
 
             default:
-                printf("\nInvalid Choice!\n");
+                printf("\nInvalid Choice! Please Try Again.\n");
         }
     }
 
