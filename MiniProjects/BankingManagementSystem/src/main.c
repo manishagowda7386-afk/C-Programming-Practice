@@ -7,11 +7,32 @@
 #include "../include/report.h"
 #include "../include/interest.h"
 
+void welcomeScreen()
+{
+    printf("\n");
+    printf("=============================================================\n");
+    printf("            BANKING MANAGEMENT SYSTEM v1.0\n");
+    printf("=============================================================\n");
+    printf(" Features Available\n");
+    printf("-------------------------------------------------------------\n");
+    printf(" * Create Account\n");
+    printf(" * Deposit / Withdraw Money\n");
+    printf(" * Transfer Money\n");
+    printf(" * Search Accounts\n");
+    printf(" * Transaction History\n");
+    printf(" * Interest Calculator\n");
+    printf(" * Export Account Report\n");
+    printf(" * Secure PIN Authentication\n");
+    printf("=============================================================\n\n");
+}
+
 int main()
 {
     int choice;
 
     loadAccounts();
+
+    welcomeScreen();
 
     while(1)
     {
@@ -85,10 +106,9 @@ int main()
             case 16:
                 saveAccounts();
 
-                printf("\n=====================================\n");
-                printf(" Accounts Saved Successfully.\n");
-                printf(" Thank You For Using Our Bank.\n");
-                printf("=====================================\n");
+                printf("\n=============================================================\n");
+                printf("   Thank you for using Banking Management System v1.0\n");
+                printf("=============================================================\n");
 
                 return 0;
 
