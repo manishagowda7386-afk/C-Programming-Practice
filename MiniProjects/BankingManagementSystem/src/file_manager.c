@@ -1,20 +1,21 @@
 #include <stdio.h>
 #include "../include/account.h"
+#include "../include/file_manager.h"
 
 void saveAccounts()
 {
     FILE *fp;
 
-    fp=fopen("../data/accounts.dat","wb");
+    fp = fopen("../data/accounts.dat", "wb");
 
-    if(fp==NULL)
+    if(fp == NULL)
     {
-        printf("\nUnable to save data.\n");
+        printf("\nError: Unable to save account data.\n");
         return;
     }
 
-    fwrite(&totalAccounts,sizeof(int),1,fp);
-    fwrite(accounts,sizeof(Account),totalAccounts,fp);
+    fwrite(&totalAccounts, sizeof(int), 1, fp);
+    fwrite(accounts, sizeof(Account), totalAccounts, fp);
 
     fclose(fp);
 }
@@ -23,16 +24,16 @@ void loadAccounts()
 {
     FILE *fp;
 
-    fp=fopen("../data/accounts.dat","rb");
+    fp = fopen("../data/accounts.dat", "rb");
 
-    if(fp==NULL)
+    if(fp == NULL)
     {
-        totalAccounts=0;
+        totalAccounts = 0;
         return;
     }
 
-    fread(&totalAccounts,sizeof(int),1,fp);
-    fread(accounts,sizeof(Account),totalAccounts,fp);
+    fread(&totalAccounts, sizeof(int), 1, fp);
+    fread(accounts, sizeof(Account), totalAccounts, fp);
 
     fclose(fp);
 }
