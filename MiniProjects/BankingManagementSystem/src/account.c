@@ -143,6 +143,11 @@ void searchAccountByName()
             found=1;
         }
     }
+
+    if(found==0)
+        printf("\nAccount Not Found.\n");
+}
+
 void updateAccount()
 {
     int number,i;
@@ -259,6 +264,8 @@ void changePin()
     printf("\nAccount Not Found!\n");
 }
 
+
+
 void bankDashboard()
 {
     int i;
@@ -312,7 +319,4 @@ void bankDashboard()
     printf("Lowest Balance      : %.2f\n",lowestBalance);
     printf("Lowest Holder       : %s\n",lowestHolder);
     printf("=====================================\n");
-}
-    if(found==0)
-        printf("\nAccount Not Found.\n");
 }
