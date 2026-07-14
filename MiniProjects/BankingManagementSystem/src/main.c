@@ -45,7 +45,7 @@ int main()
                 return 0;
 
             default:
-                printf("\nInvalid Choice.\n");
+                printf("\nInvalid Choice!\n");
         }
     }
 
