@@ -21,6 +21,7 @@ void displayMenu()
     printf("13. Export Account Report\n");
     printf("14. Interest Calculator\n");
     printf("15. Transfer Money\n");
-    printf("16. Exit\n");
+    printf("16. Generate Account Statement\n");
+    printf("17. Exit\n");
     printf("=================================================\n");
 }
