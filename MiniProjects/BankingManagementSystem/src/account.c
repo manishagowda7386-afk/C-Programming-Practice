@@ -124,9 +124,6 @@ void updateAccount()
             printf("Enter New Name : ");
             scanf(" %[^\n]",accounts[i].accountHolder);
 
-            printf("Enter New PIN : ");
-            scanf("%d",&accounts[i].pin);
-
             printf("\nAccount Updated Successfully.\n");
             return;
         }
@@ -152,6 +149,44 @@ void deleteAccount()
             totalAccounts--;
 
             printf("\nAccount Deleted Successfully.\n");
+            return;
+        }
+    }
+
+    printf("\nAccount Not Found.\n");
+}
+
+void changePin()
+{
+    int number;
+    int oldPin;
+    int newPin;
+    int i;
+
+    printf("\n========== CHANGE PIN ==========\n");
+
+    printf("Enter Account Number : ");
+    scanf("%d",&number);
+
+    for(i=0;i<totalAccounts;i++)
+    {
+        if(accounts[i].accountNumber==number)
+        {
+            printf("Enter Current PIN : ");
+            scanf("%d",&oldPin);
+
+            if(accounts[i].pin!=oldPin)
+            {
+                printf("\nIncorrect PIN!\n");
+                return;
+            }
+
+            printf("Enter New 4 Digit PIN : ");
+            scanf("%d",&newPin);
+
+            accounts[i].pin=newPin;
+
+            printf("\nPIN Changed Successfully!\n");
             return;
         }
     }
