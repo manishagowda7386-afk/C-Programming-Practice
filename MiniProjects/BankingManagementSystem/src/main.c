@@ -57,11 +57,17 @@ int main()
                 break;
 
             case 10:
+                bankDashboard();
+                break;
+
+            case 11:
                 saveAccounts();
+
                 printf("\n=====================================\n");
                 printf(" Accounts Saved Successfully.\n");
                 printf(" Thank You For Using Our Bank.\n");
                 printf("=====================================\n");
+
                 return 0;
 
             default:
