@@ -20,4 +20,7 @@ void searchAccount();
 void updateAccount();
 void deleteAccount();
 
+/* Dashboard */
+void bankDashboard();
+
 #endif
