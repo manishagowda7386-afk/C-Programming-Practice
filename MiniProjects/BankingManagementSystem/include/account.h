@@ -9,7 +9,7 @@ typedef struct
     char accountHolder[50];
     float balance;
     int pin;
-}Account;
+} Account;
 
 extern Account accounts[MAX_ACCOUNTS];
 extern int totalAccounts;
@@ -21,5 +21,6 @@ void searchAccountByName();
 void updateAccount();
 void deleteAccount();
 void bankDashboard();
+void changePin();
 
 #endif
