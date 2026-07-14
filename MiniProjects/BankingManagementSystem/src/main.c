@@ -3,6 +3,7 @@
 #include "../include/account.h"
 #include "../include/transaction.h"
 #include "../include/file_manager.h"
+#include "../include/transaction_history.h"
 
 int main()
 {
@@ -52,6 +53,10 @@ int main()
                 break;
 
             case 9:
+                viewTransactionHistory();
+                break;
+
+            case 10:
                 saveAccounts();
                 printf("\n=====================================\n");
                 printf(" Accounts Saved Successfully.\n");
