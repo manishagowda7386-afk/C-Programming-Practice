@@ -9,7 +9,8 @@ typedef struct
     char accountHolder[50];
     float balance;
     int pin;
-} Account;
+    char accountType[20];
+}Account;
 
 extern Account accounts[MAX_ACCOUNTS];
 extern int totalAccounts;
