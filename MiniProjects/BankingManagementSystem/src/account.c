@@ -3,10 +3,12 @@
 #include "../include/account.h"
 
 Account accounts[MAX_ACCOUNTS];
-int totalAccounts = 0;
+int totalAccounts=0;
 
 void createAccount()
 {
+    int i;
+
     if(totalAccounts>=MAX_ACCOUNTS)
     {
         printf("\nDatabase Full!\n");
@@ -17,6 +19,15 @@ void createAccount()
 
     printf("Account Number : ");
     scanf("%d",&accounts[totalAccounts].accountNumber);
+
+    for(i=0;i<totalAccounts;i++)
+    {
+        if(accounts[i].accountNumber==accounts[totalAccounts].accountNumber)
+        {
+            printf("\nAccount Number Already Exists!\n");
+            return;
+        }
+    }
 
     printf("Account Holder : ");
     scanf(" %[^\n]",accounts[totalAccounts].accountHolder);
@@ -46,11 +57,10 @@ void displayAllAccounts()
 
     for(i=0;i<totalAccounts;i++)
     {
-        printf("\nAccount %d\n",i+1);
-        printf("-----------------------------\n");
-        printf("Number  : %d\n",accounts[i].accountNumber);
-        printf("Name    : %s\n",accounts[i].accountHolder);
-        printf("Balance : %.2f\n",accounts[i].balance);
+        printf("\n---------------------------------\n");
+        printf("Account Number : %d\n",accounts[i].accountNumber);
+        printf("Account Holder : %s\n",accounts[i].accountHolder);
+        printf("Balance        : %.2f\n",accounts[i].balance);
     }
 }
 
@@ -66,13 +76,38 @@ void searchAccount()
         if(accounts[i].accountNumber==number)
         {
             printf("\nAccount Found\n");
-            printf("Name : %s\n",accounts[i].accountHolder);
-            printf("Balance : %.2f\n",accounts[i].balance);
+            printf("Account Number : %d\n",accounts[i].accountNumber);
+            printf("Account Holder : %s\n",accounts[i].accountHolder);
+            printf("Balance        : %.2f\n",accounts[i].balance);
             return;
         }
     }
 
     printf("\nAccount Not Found.\n");
+}
+
+void searchAccountByName()
+{
+    char name[50];
+    int i,found=0;
+
+    printf("\nEnter Account Holder Name : ");
+    scanf(" %[^\n]",name);
+
+    for(i=0;i<totalAccounts;i++)
+    {
+        if(strcmp(accounts[i].accountHolder,name)==0)
+        {
+            printf("\n---------------------------------\n");
+            printf("Account Number : %d\n",accounts[i].accountNumber);
+            printf("Account Holder : %s\n",accounts[i].accountHolder);
+            printf("Balance        : %.2f\n",accounts[i].balance);
+            found=1;
+        }
+    }
+
+    if(found==0)
+        printf("\nAccount Not Found.\n");
 }
 
 void updateAccount()
@@ -112,9 +147,7 @@ void deleteAccount()
         if(accounts[i].accountNumber==number)
         {
             for(j=i;j<totalAccounts-1;j++)
-            {
                 accounts[j]=accounts[j+1];
-            }
 
             totalAccounts--;
 
@@ -124,4 +157,36 @@ void deleteAccount()
     }
 
     printf("\nAccount Not Found.\n");
+}
+
+void bankDashboard()
+{
+    int i;
+    float total=0,highest,lowest;
+
+    if(totalAccounts==0)
+    {
+        printf("\nNo Accounts Available.\n");
+        return;
+    }
+
+    highest=accounts[0].balance;
+    lowest=accounts[0].balance;
+
+    for(i=0;i<totalAccounts;i++)
+    {
+        total+=accounts[i].balance;
+
+        if(accounts[i].balance>highest)
+            highest=accounts[i].balance;
+
+        if(accounts[i].balance<lowest)
+            lowest=accounts[i].balance;
+    }
+
+    printf("\n========== BANK DASHBOARD ==========\n");
+    printf("Total Accounts      : %d\n",totalAccounts);
+    printf("Total Bank Balance  : %.2f\n",total);
+    printf("Highest Balance     : %.2f\n",highest);
+    printf("Lowest Balance      : %.2f\n",lowest);
 }
