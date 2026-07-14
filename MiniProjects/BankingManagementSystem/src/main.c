@@ -4,6 +4,7 @@
 #include "../include/transaction.h"
 #include "../include/file_manager.h"
 #include "../include/transaction_history.h"
+#include "../include/report.h"
 
 int main()
 {
@@ -15,7 +16,7 @@ int main()
     {
         displayMenu();
 
-        printf("\nEnter your choice: ");
+        printf("\nEnter your choice : ");
         scanf("%d",&choice);
 
         switch(choice)
@@ -69,6 +70,10 @@ int main()
                 break;
 
             case 13:
+                exportAccountReport();
+                break;
+
+            case 14:
                 saveAccounts();
 
                 printf("\n=====================================\n");
