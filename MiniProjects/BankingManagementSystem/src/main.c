@@ -41,26 +41,30 @@ int main()
                 break;
 
             case 6:
-                displayAllAccounts();
+                searchAccountByName();
                 break;
 
             case 7:
-                updateAccount();
+                displayAllAccounts();
                 break;
 
             case 8:
-                deleteAccount();
+                updateAccount();
                 break;
 
             case 9:
-                viewTransactionHistory();
+                deleteAccount();
                 break;
 
             case 10:
-                bankDashboard();
+                viewTransactionHistory();
                 break;
 
             case 11:
+                bankDashboard();
+                break;
+
+            case 12:
                 saveAccounts();
 
                 printf("\n=====================================\n");
