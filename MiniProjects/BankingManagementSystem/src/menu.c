@@ -17,6 +17,7 @@ void displayMenu()
     printf("9.  Delete Account\n");
     printf("10. View Transaction History\n");
     printf("11. Bank Dashboard\n");
-    printf("12. Exit\n");
+    printf("12. Change PIN\n");
+    printf("13. Exit\n");
     printf("=================================================\n");
 }
