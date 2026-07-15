@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include "../include/menu.h"
 #include "../include/account.h"
 #include "../include/transaction.h"
@@ -7,6 +8,7 @@
 #include "../include/report.h"
 #include "../include/interest.h"
 #include "../include/statement.h"
+
 
 void welcomeScreen()
 {
@@ -27,6 +29,7 @@ void welcomeScreen()
     printf("* Secure PIN Authentication\n");
     printf("=============================================================\n\n");
 }
+
 
 int main()
 {
@@ -82,45 +85,43 @@ int main()
                 break;
 
             case 10:
-                viewTransactionHistory();
-                break;
-
-            case 11:
-                bankDashboard();
-                break;
-
-            case 12:
-                changePin();
-                break;
-
-            case 13:
-                exportAccountReport();
-                break;
-
-            case 14:
-                calculateInterest();
-                break;
-
-            case 15:
                 transferMoney();
                 break;
 
-            case 16:
+            case 11:
+                showTransactionHistory();
+                break;
+
+            case 12:
+                calculateInterest();
+                break;
+
+            case 13:
                 generateStatement();
                 break;
 
-            case 17:
+            case 14:
+                generateReport();
+                break;
+
+            case 15:
                 saveAccounts();
 
-                printf("\n=============================================================\n");
-                printf("   Thank You For Using Banking Management System\n");
-                printf("=============================================================\n");
+                printf("\n=====================================\n");
+                printf(" Thank you for using our Banking System!\n");
+                printf("=====================================\n");
 
                 return 0;
 
             default:
-                printf("\nInvalid Choice! Please Try Again.\n");
+                printf("\nInvalid Choice! Please try again.\n");
         }
+
+        saveAccounts();
+
+        printf("\nPress Enter to continue...");
+        getchar();
+        getchar();
     }
 
     return 0;
