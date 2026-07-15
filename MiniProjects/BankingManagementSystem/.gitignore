@@ -1,0 +1,26 @@
+# Dev-C++
+
+*.exe
+*.o
+*.obj
+*.layout
+*.depend
+
+# Visual Studio Code
+
+.vscode/
+
+# Code::Blocks
+
+bin/
+obj/
+
+# Temporary files
+
+*.tmp
+*.log
+
+# OS files
+
+.DS_Store
+Thumbs.db
